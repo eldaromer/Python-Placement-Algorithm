@@ -1,0 +1,24 @@
+Organization changes to be made in future:
+
+- Make position tracking for bb, FGU more elegant
+	- Store in one xyzr vector
+	- get/set functions for x, y, z, r, xyz, xyzr vectors
+	- Note that set_xyz is same as translateTo, set_r same as rotateTo, etc.
+	- May want to use @property to avoid () and keep FGU and position in sync.
+
+- Clean rotation up
+	- Share rotation matrix function for bb, FGU objects
+
+- Make rotateAbout take xyz
+
+- Add an "autoalign" function to automatically assign gender when initializing FGU list
+	- Happens when align = None, default
+
+- Short origin2grid, grid2origin to something like f2g, g2o
+	- Support fraction grid coordinates
+		- Should never happen, but be robust
+		- Print a warning if it does
+
+- All of the above will simplify lots of formulate.py - use *xyz, etc.
+
+- bb does not need to be passed - can be built from netlist (combine, then set)

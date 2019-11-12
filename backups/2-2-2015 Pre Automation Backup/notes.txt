@@ -1,0 +1,36 @@
+Organization changes to be made in future:
+
+- IDEA FOR DRASTICALLY REDUCING COLLISION CLAUSE TIME
+	- Do proposition combos, not FGU combos
+	- More short-circuitable
+
+- Make position tracking for bb, FGU more elegant
+	- Store in one xyzr vector
+	- get/set functions for x, y, z, r, xyz, xyzr vectors
+	- Note that set_xyz is same as translateTo, set_r same as rotateTo, etc.
+	- May want to use @property to avoid () and keep FGU and position in sync.
+
+- Clean rotation up
+	- Share rotation matrix function for bb, FGU objects
+
+- Make rotateAbout take xyz
+
+- Add an "autoalign" function to automatically assign gender when initializing FGU list
+	- Happens when align = None, default
+
+- Short origin2grid, grid2origin to something like f2g, g2o
+	- Support fraction grid coordinates
+		- Should never happen, but be robust
+		- Print a warning if it does
+
+- All of the above will simplify lots of formulate.py - use *xyz, etc.
+
+- bb does not need to be passed - can be built from netlist (combine, then set)
+
+------ DATA RECORDING NOTES -------
+
+- Remote n = 5, ws = (6, 6, 3) failed (PicoSAT ran entire superbowl - basically timeout). Expanded ws all the way up to (9, 9, 3), where a memory error occured. Memory error occured with 15552 props, 7.5 million uniqueness, 2.5 million collision, 4.3 million short, .43 million connection. 15 million plain Python ints (C long, 32 bits) is about half a gigabyte...
+
+Reducing to 9, 9, 2 allows for n = 6 to be solved. n = 7 could not be solved in 9, 9, 2, so 10, 10, 2 was attempted, yielding another memory error.
+
+I just read that a 32 bit installation of Python has a list limit of 500 million.
